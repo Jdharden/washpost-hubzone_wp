@@ -1,6 +1,6 @@
 # hubzone_wp
 
-#How The Washington Post Analyzed HUBZone Contacts in Washington, DC. 
+# How The Washington Post Analyzed HUBZone Contacts in Washington, DC. 
 
 The codes used for this project are all R scripts. 
 
