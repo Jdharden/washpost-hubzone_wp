@@ -36,7 +36,7 @@ ward_amount <- group_by(HUBZoneRaw, WARD) %>%
   summarise(total_contracts = sum(federal_action_obligation )) %>%
   arrange(desc(total_contracts))
 
-ward_amount$total_contracts / sum(ward_amount$total_contracts)
+ward.percent <- ward_amount$total_contracts / sum(ward_amount$total_contracts)
 
 # //////////////////////////////////////////////////////////////////////////////
 
