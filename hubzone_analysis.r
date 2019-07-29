@@ -25,7 +25,7 @@ library(lubridate)
 # //////////////////////////////////////////////////////////////////////////////
 HUBZoneRaw <- read_csv("HUBZone_Raw.csv", 
                        col_types = cols(action_date = col_date(format = "%m/%d/%Y")))
-                       ptions(stringsAsFactors = FALSE)
+                       options(stringsAsFactors = FALSE)
 # //////////////////////////////////////////////////////////////////////////////
 
 # addresses found in database was geocoded and assigned to their respective ward. 
