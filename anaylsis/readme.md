@@ -1,12 +1,3 @@
-
-title: 
-"hubzone algorithm analysis"
-author: 
-"John D. Harden"
-date: 
-"8/27/2019"
-
-
 ```{r setup, include=FALSE}
 
 library(tidyverse)
