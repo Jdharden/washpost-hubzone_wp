@@ -49,3 +49,16 @@ dc_below_25 <- filter(dc_poverty_rate, total_poverty_rate > 25, total_wo_student
 dc_below_25
 
 ```
+
+Id2
+<dbl>
+total_poverty_rate
+<dbl>
+total_wo_students
+<dbl>
+pct_point_change
+<dbl>
+11001001002	27.92662	6.668608	-21.258008	
+11001004701	27.18084	24.917601	-2.263239	
+11001010800	45.60570	7.046714	-38.558987	
+3 rows
