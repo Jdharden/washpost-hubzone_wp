@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<html>
+<head>
+
+<style>
+
+  body {
+    background-color: #d2dadb;
+}
+  
+    .overlay {
+           height: 100px;
+           position: absolute;
+           top: 30px;   /* chartArea top  */
+           right: 10px; /* chartArea left */
+    }
+    
+    .overlay2 {
+           height: 10px;
+           position: relative;
+           bottom: 0px;   /* chartArea bottom  */
+           left: 10px; /* chartArea left */
+    }
+
+
+.headerRow {
+font: 1pt "Times" black;
+}
+
+.header-background {
+  
+background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));
+background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);
+background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);
+background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%);
+background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 );    
+    
+background-color: #003366;
+color: black;
+font-family: "Times New Roman";
+}
+
+
+.light-background {
+    background-color: #9b9696;
+    font: 5pt "Ariel" black;
+}
+
+.all-cells {
+    border: 5px;
+    border-collapse: collapse;
+    font-size: 14px;
+    padding-right: 0;
+    font-family: Arial;
+    text-align: center;
+    border-spacing: 10;
+}
+
+</style>
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>HUBZone database</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic|Roboto+Mono:400,700|Material+Icons" rel="stylesheet">
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript" 
+src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/chart/interactive/html/tablequerywrapper.js"></script>
+    
+
+<title>Unaccompanied Children</title>
+
+<script type='text/javascript'>
+
+function drawVisualization () {
+
+var cssClassNames = {
+'headerRow': 'large-font bold-font header-background',
+'oddTableRow': 'light-background',
+'headerCell': 'header-background',
+'tableRow': '',
+'tableCell': 'all-cells'
+         };
+
+var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1ZO4CnC7Z8jVUYInGV8VShpA7JANTmGkENkmJ90_vwfY/edit?usp=sharing');
+    
+query.setQuery('SELECT A, B, C, D, E, F, G, H, I, J, K, L, M');
+    
+    query.send(function (response) {        
+        if (response.isError()) {
+            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+            return;
+        }
+        var data = response.getDataTable();
+        
+        // create a NumberFilter control
+
+var filter = new google.visualization.ControlWrapper({
+'controlType': 'CategoryFilter',
+      'containerId': 'control_div',
+        'options': {
+        'filterColumnIndex': 1,
+         'backgroundColor': '#d2dadb',
+          'ui': {
+          'labelStacking': 'vertical',
+          'label': 'Select State:',
+          'allowTyping': false,
+          'allowMultiple': true,
+        }
+      },
+        });
+        
+var filter2 = new google.visualization.ControlWrapper({
+'controlType': 'CategoryFilter',
+      'containerId': 'control_div2',
+        'options': {
+        'filterColumnIndex': 0,
+         'backgroundColor': '#d2dadb',
+          'ui': {
+          'labelStacking': 'vertical',
+          'label': 'Select City:',
+          'allowTyping': false,
+          'allowMultiple': true,
+        }
+      },
+        });       
+        
+        var filter3 = new google.visualization.ControlWrapper({
+'controlType': 'CategoryFilter',
+      'containerId': 'control_div3',
+        'options': {
+        'filterColumnIndex': 4,
+         'backgroundColor': '#d2dadb',
+          'ui': {
+          'labelStacking': 'vertical',
+          'label': 'Select DUNS:',
+          'allowTyping': false,
+          'allowMultiple': true,
+        }
+      },
+        }); 
+        
+        
+        // create a Table visualization
+        var table = new google.visualization.ChartWrapper({
+            chartType: 'Table',
+            containerId: 'table_div',
+          
+            options: {
+          showRowNumber: 'true',
+              height: '100%',
+               cssClassNames: cssClassNames,
+               width: 'auto',
+                pageSize: 15,
+                opacity: 10,
+                page: 'enable',
+                allowHtml: true,
+            }
+        });
+                 
+    // Create the dashboard.
+        var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard')).
+        // Configure the string filter to affect the table contents
+        bind([filter],[table]).
+        bind([filter3],[table]).
+
+        // Draw the dashboard
+
+        draw(data);
+         
+    });
+}
+
+google.load('visualization', '1', {'packages':['controls']});
+google.setOnLoadCallback(drawVisualization);
+//]]> 
+
+</script>
+
+</head>
+<body>
+
+<div id="dashboard">
+<div id="control_div"></div>
+<div id="control_div3"></div>
+<div class="overlay">
+<div style="color: #444; font-family:'Arial Black'; font-size: 12px; letter-spacing: .15em; margin-top:5px; margin-left:5px;">HUBZone Database</div>
+
+</div>
+
+<div class="overlay2"></div>
+<div id="table_div"></div>	
+</div>
+</body>
+</html>
