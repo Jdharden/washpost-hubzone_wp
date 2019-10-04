@@ -1,11 +1,8 @@
----
+
 title: "hubzone algorithm analysis"
 author: "John D. Harden"
 date: "8/27/2019"
-output:
-  html_document: default
-  pdf_document: default
----
+
 
 ```{r setup, include=FALSE}
 
